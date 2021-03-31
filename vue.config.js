@@ -1,3 +1,4 @@
+const path = require("path");
 module.exports = {
   // 项目部署的基础路径
   publicPath: "/vue-admin/",
@@ -15,7 +16,16 @@ module.exports = {
   // 调整内部的 webpack 配置。
   // 查阅 https://github.com/vuejs/vue-docs-zh-cn/blob/master/vue-cli/webpack.md
   chainWebpack: () => {},
-  configureWebpack: () => {},
+  configureWebpack: config => {
+    config.resolve = {
+      // 配置解析别名
+      extensions: [".js", ".json", ".vue"],
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+        public: path.resolve(__dirname, "./public")
+      }
+    };
+  },
 
   // CSS 相关选项
   css: {
